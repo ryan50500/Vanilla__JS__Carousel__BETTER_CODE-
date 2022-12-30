@@ -1,37 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML code</title>
-    <link rel="stylesheet" href="/style.css">
-  </head>
-  <body>
-    <!-- INSERT CODE HERE -->
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Vanilla JS carousel</title>
+</head>
 
+<body>
+	<div class="wrapper">
+		<!-- <div class="container"> -->
+		<!--   <div class="carousel"> -->
+		<div class="slider">
+			<section style="background-color: aqua;">content for section 1</section>
+			<section style="background-color: yellow;">content for section 2</section>
+			<section style="background-color: lightcoral;">content for section 3</section>
+			<section style="background-color: red;">content for section 4</section>
+			<!-- <section>content for section 5</section> -->
+			<!-- <section>content for section 6</section> -->
+		</div>
+		<!--   </div> -->
+		<!-- </div> -->
+    </div>
+    
 
-    <div class="wrapper">
-        <!-- <div class="container"> -->
-        <!--   <div class="carousel"> -->
-            <div class="slider">
-              <section style="background-color: aqua;">content for section 1</section>
-              <section style="background-color: yellow;">content for section 2</section>
-              <section style="background-color: lightcoral;">content for section 3</section>
-              <section style="background-color: red;">content for section 4</section>
-              <!-- <section>content for section 5</section> -->
-              <!-- <section>content for section 6</section> -->
-            </div>
-        <!--   </div> -->
-        <!-- </div> -->
-        </div>
-       
-        <!-- <button>BUTTON</button> -->
+  <style>
+	.wrapper {
+		max-width: 955px;
+		margin: 0 auto;
+		background-color: pink;
+		overflow: hidden;
+	}
+	
+	.container {
+		width: 300px;
+		height: 300px;
+	}
+	
+	.slider {
+		z-index: 1;
+		display: flex;
+		height: 320px;
+		width: 500%;
+		flex-shrink: 0;
+		transition: all 0.5s;
+	}
+	
+	.slider section {
+		display: flex;
+		width: 280px;
+		margin: 17px;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid black;
+	}
+	
+	button {
+		position: absolute;
+		top: 350px;
+	}
+ </style>
+    
 
+	<script>
 
+        const slider = document.querySelector('.slider');
+        const theButton = document.querySelector('button');
+        // get first carousel item
+        let boxWidth = document.querySelectorAll('.slider section')[0];
+        // get width of  carousel item (including margin)
+        let boxWidthPlusMargin = boxWidth.offsetWidth;
+        // add margin widths onto offsetwidths
+        boxWidthPlusMargin += parseInt(window.getComputedStyle(boxWidth).getPropertyValue('margin-left'));
+        boxWidthPlusMargin += parseInt(window.getComputedStyle(boxWidth).getPropertyValue('margin-right'));
 
-     <!-- CODE ENDS HERE -->
-    <script src="/script.js"></script>
-  </body>
+	setInterval(function() {
+		slider.style.transform = `translateX(-${boxWidthPlusMargin}px)`;
+    }, 2000);
+    
+	// the 'transitionend' event listener is triggered because '.slider' has a transition in the CSS
+	slider.addEventListener('transitionend', function() {
+		// append the first carousel item to the end of the slider
+		slider.appendChild(slider.firstElementChild);
+		// remove CSS transition from '.slider'
+		slider.style.transition = 'none';
+		// set slider back to original position
+		slider.style.transform = 'translate(0)';
+		// setTimeout function solves weird jerking problem
+		setTimeout(function() {
+			slider.style.transition = 'all 0.5s';
+		});
+    });
+    
+	</script>
+</body>
+
 </html>
