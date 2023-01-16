@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-		
 	let slideLeftCanRun = true;
 	let slideRightCanRun = false;
 	const leftButton = document.getElementById('left');
@@ -18,20 +17,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 	// LEFT SLIDER FUNCTION
 	// LEFT SLIDER FUNCTION
-	 // this runs automatically as 'slideLeftCanRun' is set to true
+	// this runs automatically as 'slideLeftCanRun' is set to true
 	const slidingLeft = setInterval(function() {
 		slideLeft();
 	}, 2000);
-	function slideLeft(){
+	function slideLeft() {
 		// runs automatically as 'slideLeftCanRun' is set to true
 		if (slideLeftCanRun) {
 			slider.style.transform = `translateX(-${boxWidthPlusMargin}px)`;
 			console.log('Left is running!');
-		}
-		else {
+		} else {
 			return;
 		}
-	 }
+	}
 	// the 'transitionend' event listener is triggered because '.slider' has a transition in the CSS
 	slider.addEventListener('transitionend', function() {
 		if (slideLeftCanRun) {
@@ -46,8 +44,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 			setTimeout(function() {
 				slider.style.transition = 'all 0.5s';
 			});
-		}
-		else {
+		} else {
 			return;
 		}
 	});
@@ -57,21 +54,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-	
 
 	// RIGHT SLIDER FUNCTION
 	// RIGHT SLIDER FUNCTION
 	// function only triggered when user clicks on Right button
-	function slideRight(){
+	function slideRight() {
 		// 'slideRightCanRun' gets set to true when user clicks on Right button
 		if (slideRightCanRun) {
 			slider.style.transform = `translateX(${boxWidthPlusMargin}px)`;
 			console.log('Right is running!');
-		}
-		else {
+		} else {
 			return;
 		}
-	 }
+	}
 	const slidingRight = setInterval(function() {
 		slideRight();
 	}, 2000);
@@ -89,36 +84,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
 			setTimeout(function() {
 				slider.style.transition = 'all 0.5s';
 			});
-		}
-		else {
+		} else {
 			return;
 		}
 	});
+	// RIGHT SLIDER FUNCTION
+	// RIGHT SLIDER FUNCTION
+	// RIGHT SLIDER FUNCTION
 
 
 
-// when any button is clicked, clear the set interval functions (automatic slider)
-// Left button
-leftButton.addEventListener('click', function(){
-	clearInterval(slidingLeft);
-	clearInterval(slidingRight);
-	slideRightCanRun = false;
-	slideLeftCanRun = true;
-	console.log('transitioned ENDED');
-	slideLeft();
-});
-
-
-// when any button is clicked, clear the set interval functions (automatic slider)
-// Right button
-rightButton.addEventListener('click', function(){
-	clearInterval(slidingLeft);
-	clearInterval(slidingRight);
-	slideLeftCanRun = false;
-	slideRightCanRun = true;
-	console.log('transitioned ENDED');
-	slideRight();
-});
-
-
+	
+	// when any button is clicked, clear the set interval functions (automatic slider)
+	// Left button
+	leftButton.addEventListener('click', function() {
+		clearInterval(slidingLeft);
+		clearInterval(slidingRight);
+		slideRightCanRun = false;
+		slideLeftCanRun = true;
+		console.log('transitioned ENDED');
+		slideLeft();
+	});
+	// when any button is clicked, clear the set interval functions (automatic slider)
+	// Right button
+	rightButton.addEventListener('click', function() {
+		clearInterval(slidingLeft);
+		clearInterval(slidingRight);
+		slideLeftCanRun = false;
+		slideRightCanRun = true;
+		console.log('transitioned ENDED');
+		slideRight();
+	});
 });
